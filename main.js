@@ -1,27 +1,27 @@
 const form = document.querySelector('.hero__form');
-console.log(form);
 const inputs = document.querySelectorAll('input');
-console.log(inputs);
 const error = document.querySelectorAll('.form__error');
-console.log(error);
+const labels = document.querySelectorAll('.form__label');
+const errorImg = document.querySelectorAll('.error__img');
+
+console.log(errorImg);
 
 form.addEventListener('submit', (event) => {
-  console.log('Submissão Efetuada')
   inputs.forEach((input, index) => {
     if (!input.validity.valid) {
-      console.log('Função de Erro Disparada');
-      showError(input, index);
+      const label = labels[index].textContent;
+      showError(input, index, label);
       event.preventDefault();
     }
   });
 })
 
-function showError(input, index) {
+function showError(input, index, label) {
   if (input.validity.valueMissing) {
-    console.log('Erro 1')
-    error[index].textContent = "You need to put a input";
+    error[index].textContent = `${label} cannot be empty`;
+    errorImg[index].style.display = 'block';
   } else if  (input.validity.typeMismatch) {
-    console.log('Erro 2')
-    error[index].textContent = "You need to fuck you";
+    error[index].textContent = `invalid ${label}`;
+    errorImg[index].style.display = 'block';
   }
 }
