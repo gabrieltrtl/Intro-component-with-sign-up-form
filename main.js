@@ -4,7 +4,6 @@ const error = document.querySelectorAll('.form__error');
 const labels = document.querySelectorAll('.form__label');
 const errorImg = document.querySelectorAll('.error__img');
 
-console.log(errorImg);
 
 form.addEventListener('submit', (event) => {
   inputs.forEach((input, index) => {
@@ -12,6 +11,8 @@ form.addEventListener('submit', (event) => {
       const label = labels[index].textContent;
       showError(input, index, label);
       event.preventDefault();
+    } else {
+      clearError(index);
     }
   });
 })
@@ -24,4 +25,9 @@ function showError(input, index, label) {
     error[index].textContent = `invalid ${label}`;
     errorImg[index].style.display = 'block';
   }
+}
+
+function clearError(index) {
+  error[index].textContent = '';
+  errorImg[index].style.display = 'none';
 }
